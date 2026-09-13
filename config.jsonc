@@ -1,0 +1,110 @@
+{
+    "layer": "top",
+    "position": "top",
+    "output": ["DP-1"],
+
+    "height": 36,
+    "spacing": 8,
+
+    // Left: workspaces
+    "modules-left": [
+        "hyprland/workspaces"
+    ],
+
+    // Center: focused application and window title
+    "modules-center": [
+        "hyprland/window"
+    ],
+
+    // Right: system information, with clock at far-right edge
+    "modules-right": [
+        "cpu",
+        "memory",
+        "hyprland/language",
+        "network",
+        "pulseaudio",
+        "tray",
+        "clock"
+    ],
+
+    "hyprland/workspaces": {
+        "format": "{id}",
+        "on-click": "activate",
+        "sort-by-number": true,
+        "all-outputs": false,
+
+        "persistent-workspaces": {
+            "DP-1": [1, 2, 3, 4, 5]
+        }
+    },
+
+    "hyprland/window": {
+        "format": "{title}",
+        "separate-outputs": true,
+        "max-length": 70
+    },
+
+    "cpu": {
+        "interval": 2,
+        "format": "  CPU {usage}%",
+        "tooltip": true
+    },
+
+    "memory": {
+        "interval": 2,
+        "format": "  RAM {percentage}%",
+        "tooltip-format": "Used: {used:0.1f} GiB\nAvailable: {avail:0.1f} GiB\nTotal: {total:0.1f} GiB"
+    },
+
+    "hyprland/language": {
+        "format": "  {}",
+        "format-en": "EN",
+        "format-ka": "GE"
+    },
+
+    "network": {
+        "interface": "enp7s0",
+        "interval": 2,
+
+        "format-wifi": "󰤨  {essid}",
+        "format-ethernet": "󰈀  LAN Connected",
+        "format-linked": "󰈀  LAN No IP",
+        "format-disconnected": "󰈂  LAN Disconnected",
+
+        "tooltip-format-wifi": "{essid}\nSignal: {signalStrength}%\nIP: {ipaddr}",
+        "tooltip-format-ethernet": "{ifname}\nIP: {ipaddr}",
+        "tooltip-format-linked": "{ifname}\nCable connected, waiting for an IP address",
+        "tooltip-format-disconnected": "LAN disconnected",
+
+        "on-click": "nm-connection-editor"
+    },
+
+    "pulseaudio": {
+        "format": "{icon}  {volume}%",
+        "format-muted": "󰖁  Muted",
+
+        "format-icons": {
+            "default": [
+                "󰕿",
+                "󰖀",
+                "󰕾"
+            ]
+        },
+
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-scroll-up": "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+    },
+
+    "tray": {
+        "icon-size": 18,
+        "spacing": 10
+    },
+
+    "clock": {
+        "interval": 1,
+        "format": "󰥔  {:%H:%M:%S}",
+        "format-alt": "󰃭  {:%A, %d %B %Y}",
+        "tooltip-format": "<tt>{calendar}</tt>"
+    }
+}
